@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:8000/'
+const baseUrl = 'https://www.ura.hcmut.edu.vn/NMT/api/';
 // const baseUrl = 'https://vi-ba-nmt-api-proxy.herokuapp.com';
 
 const instance = axios.create({
@@ -32,7 +32,7 @@ const ttsAPI = (text) => {
     return instance.post('/tts/speak', {
         'text': text
     }, {
-        baseURL: 'http://www.ura.hcmut.edu.vn'
+        baseURL: 'https://www.ura.hcmut.edu.vn'
     })
 }
 

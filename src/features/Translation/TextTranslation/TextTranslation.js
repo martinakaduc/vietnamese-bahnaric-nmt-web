@@ -60,6 +60,7 @@ const TextTranslation = () => {
     const [translating, setTranslating] = useState(false);
     const [ttsInput, setTtsInput] = useState("");
     const [audioData, setAudioData] = useState("");
+    const [audioDataFm, setAudioDataFm] = useState("");
     const [audioAvailable, setAudioAvailable] = useState(false);
 
     const srcRef = useRef(null);
@@ -112,7 +113,9 @@ const TextTranslation = () => {
         ttsAPI(ttsInput)            
             .then(response => {
                 const speech = response.data.speech;
+		const speech_fm = response.data.speech_fm;
                 setAudioData(speech);
+		    setAudioDataFm(speech_fm);
                 setAudioAvailable(true);
             }).catch(error => {
                 if (error.response) {
@@ -269,14 +272,6 @@ const TextTranslation = () => {
                 <Col span={8}>
                 </Col>
                 <Col span={8}>
-                    <div style={{position: 'relative', top: '-0.9em'}}>
-                        {audioAvailable && !translating && <audio 
-                            className='audio-player'
-                            controls 
-                            src={`data:audio/wav;base64,${audioData}`}
-                        >
-                        </audio>}
-                    </div>
                 </Col>
             </Row>
         </div>
@@ -312,6 +307,24 @@ const TextTranslation = () => {
                             >
                                 {translatedText}
                             </div>
+
+	    		    <div style={{position: 'relative', top: '1em'}}>Male
+	                                        {audioAvailable && !translating && <audio
+							                            className='audio-player'
+							                            controls
+							                            src={`data:audio/wav;base64,${audioData}`}
+							                            >
+							                            </audio>}
+	                                    </div>
+
+	    		    <div style={{position: 'relative', top: '1em'}}>Female
+	                                        {audioAvailable && !translating && <audio
+							 			    className='audio-player'
+							                            controls
+							                            src={`data:audio/wav;base64,${audioDataFm}`}
+							                            >
+							                            </audio>}
+	                                    </div>
                         </Spin>
                     </Card>
                 </Col>
